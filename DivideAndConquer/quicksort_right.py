@@ -12,7 +12,8 @@ def quicksort(lst, left, right):
 
 def partition(lst, left, right):
 
-    pivot = lst[left]
+    pivot = lst[right]
+    lst[left], lst[right] = lst[right], lst[left]
     i = left + 1
     for j in range(i, right+1):
         if lst[j] < pivot:

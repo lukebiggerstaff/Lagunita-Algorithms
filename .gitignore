@@ -1,2 +1,4 @@
 *.pyc
 *.swp
+.pyc
+test.txt

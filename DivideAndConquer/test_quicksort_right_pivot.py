@@ -1,7 +1,7 @@
 import unittest
 import random
 
-import quicksort as qs
+import quicksort_right as qs
 
 
 class TestQuicksort(unittest.TestCase):
