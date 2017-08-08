@@ -2,12 +2,13 @@ import os
 import sys
 import random
 
+from copy import deepcopy
 from collections import defaultdict
 
 
 def compute(graph):
     if len(graph) < 3:
-        return graph
+        return len(graph[random.choice(list(graph.keys()))])
     contract(graph)
     return compute(graph)
 
@@ -17,7 +18,7 @@ def contract(graph):
     supernode, contractednode = (
                         (vertex1,vertex2) if vertex1 - vertex2 < 0
                         else (vertex2,vertex1))
-    # transfer all edges that go to contracted node to super node
+    # transfer all edges that point to contracted node to super node
     for edge in graph[contractednode]:
         graph[edge][:] = [x if x is not contractednode else supernode
                           for x in graph[edge]]
@@ -28,6 +29,20 @@ def contract(graph):
     # remove contracted node
     del graph[contractednode]
 
+def find_min_cut(graph, interval):
+    counter = interval
+    mincut = 0
+    while counter > 0:
+        graph_copy = deepcopy(graph)
+        result = compute(graph_copy)
+        print(f'result is {result} and mincut is currently {mincut}')
+        if mincut is 0:
+            mincut = result
+        else:
+            mincut = result if result < mincut else mincut
+        counter -= 1
+    return mincut
+
 
 if __name__ == '__main__':
     graph = defaultdict(list)
@@ -35,7 +50,4 @@ if __name__ == '__main__':
         for line in f:
             line_lst = [int(x) for x in line.split('\t') if x is not '\n']
             graph[line_lst[0]] = line_lst[1:]
-    compute(graph)
-    for node in graph:
-        print('this is node: {} with edges: {}'.format(node, graph[node]))
-
+    find_min_cut(graph, int(sys.argv[2]))
