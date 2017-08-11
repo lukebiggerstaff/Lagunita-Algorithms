@@ -49,5 +49,5 @@ if __name__ == '__main__':
     with open(sys.argv[1]) as f:
         for line in f:
             line_lst = [int(x) for x in line.split('\t') if x is not '\n']
-            graph[line_lst[0]] = line_lst[1:]
+            graph[line_lst[0]] += line_lst[1:]
     find_min_cut(graph, int(sys.argv[2]))
