@@ -12,12 +12,10 @@ def reverse_graph(graph):
     reversegraph = defaultdict(list)
     for node in graph.keys():
         for edge in graph[node]:
-            reversegraph[edge] += node
+            reversegraph[edge] += [node]
     return reversegraph
 
-def dfsfirstpass(graph, start='1', stack=list(), visited=None):
-    if visited is None:
-        visited = set()
+def dfsfirstpass(graph, start, stack=list(), visited=set()):
     visited.add(start)
     for edge in set(graph[start]) - visited:
         dfsfirstpass(graph, edge, stack, visited)
@@ -60,6 +58,6 @@ if __name__ == '__main__':
             line_lst = re.findall(r'(\d+|\w+)',line)
             graph[line_lst[0]] += [line_lst[1]]
             rgraph[line_lst[1]] += [line_lst[0]]
-    stack1 = dfsfirstpass(graph, '100')
+    stack1 = dfsfirstpass(graph, 'Mike')
     print(f'stack is {stack1} and graph is {graph}')
     print(f'stack is {len(stack1)} and keys are {len(graph.keys())}')
