@@ -9,6 +9,7 @@ def shortestpath(graph, start, end):
     prev = defaultdict(None)
 
     prev[start] = start
+    print(f'finding path from { start } to { end }')
 
     def traceback(node, path):
         if node is start:
@@ -24,15 +25,18 @@ def shortestpath(graph, start, end):
         print(f'searching node { node }')
         if node not in V:
             V.add(node)
-            for edge in [graph[node]]:
-                if edge is end:
+            for edge in graph[node] - V:
+                if edge == end:
                     path = deque([edge])
                     print(f'found end "{ end }"')
                     print(f'{edge} -> {node}')
                     traceback(node,path)
+                    return path
                 if edge in graph:
                     Q.append(edge)
                     prev[edge] = node
+
+    print('There is no path between start { start } and end { end } ')
 
 
 if __name__ == '__main__':
