@@ -13,15 +13,5 @@ class TestSCC(unittest.TestCase):
                 return False
         return True
 
-    def test_can_reverse_graph(self):
-        graph = defaultdict(list)
-        graph['a'] += 'b'
-        graph['b'] += 'c'
-        graph['c'] += 'd'
-        revgraph = scc.graph_reverse(graph)
-        self.assertFalse(self.dictionaries_are_equal(graph, revgraph))
-        revgraph = scc.graph_reverse(revgraph)
-        self.assertTrue(self.dictionaries_are_equal(graph, revgraph))
-
     def test_can_return_ordered_stack(self):
         pass
