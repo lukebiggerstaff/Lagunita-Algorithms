@@ -13,29 +13,11 @@ def shortestpath(graph, start):
     prev = defaultdict(None)
     dist = defaultdict(int)
 
-    for v in Q:
-        dist[v] = 10 ** 20
-        prev[v] = None
+    for node in Q:
+        dist[node] = 10 ** 20
+        prev[node] = None
 
     dist[start] = 0
-
-    def printinfo():
-        for v in Q:
-            print(f'Q has { v }')
-        for v in dist:
-            print(f'dist for { v } is { dist[v] }')
-        for v in prev:
-            print(f'prev for { v } is { prev[v] }')
-
-
-    def traceback(node, path):
-        if node is start:
-            path.appendleft(node)
-            print(path)
-            return
-        print(f'{node} -> {prev[node]}')
-        path.appendleft(node)
-        traceback(prev[node],path)
 
     def findmin(Q, dist):
         klist = [x for x in dist if x in Q]
@@ -49,7 +31,6 @@ def shortestpath(graph, start):
 
         node = findmin(Q, dist)
 
-
         if node in graph:
             for edge, length in graph[node].items():
                 alt = dist[node] + length
@@ -58,11 +39,9 @@ def shortestpath(graph, start):
                     prev[edge] = node
 
     resultset = [7,37,59,82,99,115,133,165,188,197]
-    for each in resultset:
-        path = deque()
-        traceback(each, path)
 
-    return dist, prev
+    for each in resultset:
+        print(f'distance for { each } is { dist[each] }')
 
 
 if __name__ == '__main__':
