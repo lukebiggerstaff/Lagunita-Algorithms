@@ -28,5 +28,5 @@ if __name__ == '__main__':
                 num_set[num] += 1
     print(f'Created num set and starting algorithm now.')
     results = find_2_sum(num_set)
-    print(f'Number of t values are {len(results)}\n')
+    print(f'Number of t values are {len(results)} \n')
 
