@@ -22,4 +22,4 @@ class MaxHeap(object):
         return len(self.heap) < len(other.heap)
 
     def __str__(self):
-        return f"MaxHeap {[x for x in self.heap]}"
+        return "MaxHeap {}".format([x for x in self.heap])

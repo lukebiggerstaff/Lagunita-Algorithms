@@ -21,9 +21,5 @@ class MinHeap(object):
     def __lt__(self, other):
         return len(self.heap) < len(other.heap)
 
-    def __lte__(self, other):
-        print(f'lenselfheap: {len(self.heap) and lenotherheap: {len(other.heap)}}')
-        return len(self.heap) <= len(other.heap)
-
     def __str__(self):
-        return f"MinHeap {[x for x in self.heap]}"
+        return "MinHeap {}".format([x for x in self.heap])

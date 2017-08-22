@@ -37,7 +37,7 @@ class TwoHeaps(object):
 
     def find_current_median(self):
         if len(self.minh) == len(self.maxh):
-            self.medians.append( (self.minh.getmin() + self.maxh.getmax()) / 2 )
+            self.medians.append( self.maxh.getmax() )
         elif len(self.minh) > len(self.maxh):
             self.medians.append( self.minh.getmin() )
         else:
@@ -47,12 +47,9 @@ def compute_medians(inputfile):
     heaps = TwoHeaps()
     with open(inputfile) as f:
         for line in f:
-            heaps.add_to_heaps(line)
+            heaps.add_to_heaps(int(line))
             heaps.find_current_median()
-    total = 0;
-    for each in heaps.medians:
-        total += each
-    print(f'{total % 10000}')
+    print('all medians is {} from {} medians'.format(sum(heaps.medians)%10000, len(heaps.medians)))
 
 
 if __name__ == '__main__':
