@@ -10,7 +10,7 @@ def find_weight(lst):
     for row in lst:
         jobweight, joblength = row[0], row[1]
         time += joblength
-        completiontime = jobweight * joblength
+        completiontime = jobweight * time
         totalweight += completiontime
     return totalweight
 
