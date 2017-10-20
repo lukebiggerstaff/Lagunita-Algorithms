@@ -12,11 +12,17 @@ def readFileIntoGraph(file):
                 }
             else:
                 graph[line_lst[0]][line_lst[1]] = line_lst[2]
+            if line_lst[1] not in graph:
+                graph[line_lst[1]] = {
+                    line_lst[0]:line_lst[2]
+                }
+            else:
+                graph[line_lst[1]][line_lst[0]] = line_lst[2]
     return graph
 
 
 def prim(graph):
-    # initialize set to keep track of verticies not yet in tree
+    # initialize set to keep track of vertices not yet in tree
     vertsnotintree = set(
         [x for x in graph]).union(
         [y for x in graph for y in graph[x]]
@@ -25,7 +31,7 @@ def prim(graph):
     # create empty set to keep track of verts and start with random vertex
     vertsintree = set()
     vertsintree.add(vertsnotintree.pop())
-    print('starting vert is {}'.format(vertsintree))
+    #print('starting vert is {}'.format(vertsintree))
 
     # initialize mst
     mst = defaultdict(dict)
@@ -53,7 +59,7 @@ def prim(graph):
     while vertsnotintree:
         # find minimum edge to add to mst
         v1,v2,edgeweight = findNextEdge()
-        print('v1 is: {}, v2 is : {}'.format(v1, v2))
+        #print('v1 is: {}, v2 is : {}'.format(v1, v2))
         # add new edge to vertsintree and remove from vertsnotintree
         vertsnotintree.remove(v2)
         vertsintree.add(v2)
@@ -61,7 +67,7 @@ def prim(graph):
         #print('verts IN : {}'.format(vertsintree))
         # add edge to mst
         addToMST(v1,v2,edgeweight)
-        print('ongoing mst {}'.format( mst ))
+        #print('ongoing mst {}'.format( mst ))
     return mst
 
 def findTotalEdgeWeight(tree):
@@ -75,5 +81,4 @@ def findTotalEdgeWeight(tree):
 if __name__ == '__main__':
     graph = readFileIntoGraph(sys.argv[1])
     mst = prim(graph)
-    print('final mst: {}'.format(mst))
     print(findTotalEdgeWeight(mst))
