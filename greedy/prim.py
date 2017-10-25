@@ -31,7 +31,6 @@ def prim(graph):
     # create empty set to keep track of verts and start with random vertex
     vertsintree = set()
     vertsintree.add(vertsnotintree.pop())
-    #print('starting vert is {}'.format(vertsintree))
 
     # initialize mst
     mst = defaultdict(dict)
@@ -47,27 +46,21 @@ def prim(graph):
         return x,y,min_edge_weight
 
     def addToMST(begin,end,weight):
-        #print('true or false :{}'.format(begin in mst))
         if begin not in mst:
             mst[begin] = {
                 end:weight
             }
         else:
-            #print('begin {}, end {}, weight {}'.format(begin, end, weight))
             mst[begin][end] = weight
 
     while vertsnotintree:
         # find minimum edge to add to mst
         v1,v2,edgeweight = findNextEdge()
-        #print('v1 is: {}, v2 is : {}'.format(v1, v2))
         # add new edge to vertsintree and remove from vertsnotintree
         vertsnotintree.remove(v2)
         vertsintree.add(v2)
-        #print('verts NOT in : {}'.format(vertsnotintree))
-        #print('verts IN : {}'.format(vertsintree))
         # add edge to mst
         addToMST(v1,v2,edgeweight)
-        #print('ongoing mst {}'.format( mst ))
     return mst
 
 def findTotalEdgeWeight(tree):
