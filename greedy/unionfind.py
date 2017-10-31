@@ -25,7 +25,7 @@ class UnionNode:
         self.rank += rank
 
     def __str__(self):
-        return 'identity: {} and leader: {}'.format(
+        return 'node: {} and leader: {}'.format(
             self.identity,
             self.leader
         )
@@ -52,14 +52,18 @@ class UnionFind:
         return self.find(self.storage[vertex].get_leader())
 
     def union(self, vertex1, vertex2):
-        leader1 = self.storage[vertex1].get_leader()
-        leader2 = self.storage[vertex2].get_leader()
+        leader1 = self.find(vertex1)
+        leader2 = self.find(vertex2)
         if self.storage[leader1].get_rank() > self.storage[leader2].get_rank():
             self.storage[leader2].set_leader(leader1)
             self.storage[leader1].change_rank(self.storage[leader2].get_rank())
+            # return leader2 to remove from leader lists
+            return leader2
         else:
             self.storage[leader1].set_leader(leader2)
             self.storage[leader2].change_rank(self.storage[leader1].get_rank())
+            # return leader1 to remove from leader lists
+            return leader1
 
     def __str__(self):
         print('UFDS has the following nodes and leaders\n{')
