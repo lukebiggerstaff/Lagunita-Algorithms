@@ -22,5 +22,10 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(test_head.left.data, 4)
         self.assertEqual(test_head.right.data, 6)
 
+    def test_traverse(self):
+        # write this one later
+        pass
+
+
 if __name__ =='__main__':
     unittest.main()

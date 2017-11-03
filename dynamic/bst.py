@@ -10,6 +10,10 @@ class Node:
         self.left = None
         self.right = None
 
+    def __str__(self):
+        return ''.format(self.data)
+
+
 def add_node_to_tree(head, node):
     if node < head.data:
         if head.left == None:
@@ -26,9 +30,18 @@ def add_node_to_tree(head, node):
             return
         add_node_to_tree(head.right, node)
 
-def traverse(tree, queue=deque(), node_list=list()):
-    if tree == None:
-        return
+def print_nodes(tree, queue=None):
+    if tree == None: return
+    if queue == None: queue = deque()
+    print('{}'.format(tree.data), end=' ')
+    [queue.append(node) for node in [tree.left, tree.right] if node]
+    while queue:
+        print_nodes(queue.popleft(), queue)
+
+def traverse(tree, queue=None, node_list=None):
+    if tree == None: return
+    if queue == None: queue = deque()
+    if node_list == None: node_list = list()
     node_list.append([tree.data, tree.height])
     [queue.append(node) for node in [tree.left, tree.right] if node]
     if queue:
