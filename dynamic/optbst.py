@@ -26,27 +26,21 @@ def create_tree(node_list):
 def find_weight_of_tree(tree, key):
     weight = 0
     weighted_node_list = bst.traverse(tree)
-    print('wnl is {} '.format(weighted_node_list),end=' ')
     for lst in weighted_node_list:
         weight += (key[lst[0]] * lst[1])
     return weight
 
 def find_min_tree(node_list, key):
-    print('##begin find_min_tree##\n')
     min_weight = 10 ** 10
     for lst in permutations(node_list):
         temp_lst = [x for x in lst]
         tree = create_tree(temp_lst)
         weight = find_weight_of_tree(tree, key)
-        print('weight {}'.format(weight))
         if weight < min_weight:
             min_weight = weight
-            retree = tree
-    print('##end find_min_tree##\n')
-    return min_weight, retree
+    return min_weight
 
 if __name__ == '__main__':
     lst = create_node_list(keys)
-    result,resultree = find_min_tree(lst, keys)
+    result = find_min_tree(lst, keys)
     print('min tree is {}\n'.format(result))
-    print('order of list {}'.format(resultree))
